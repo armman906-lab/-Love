@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Special Book</title>
+    <style>
+        body { 
+            background-color: #ffdde1; 
+            font-family: 'Arial', sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            transition: background 0.5s ease;
+        }
+        .container { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            text-align: center; 
+            max-width: 400px; 
+            transition: opacity 0.5s ease;
+        }
+        h2 { color: #d63384; }
+        input { 
+            padding: 10px; 
+            border: 2px solid #ffafbd; 
+            border-radius: 10px; 
+            margin-bottom: 20px; 
+            width: 80%; 
+        }
+        button { 
+            background-color: #d63384; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            margin: 5px; 
+        }
+        .hidden { 
+            display: none; 
+            opacity: 0; 
+        }
+        .visible { 
+            opacity: 1; 
+        }
+        .page { 
+            font-size: 1.2rem; 
+            color: #555; 
+        }
+    </style>
+</head>
+<body>
+
+<div id="login" class="container visible">
+    <h2>Enter our special date ❤️</h2>
+    <input type="text" id="dateInput" placeholder="DD/MM/YY">
+    <br>
+    <button onclick="checkDate()">Unlock</button>
+</div>
+
+<div id="book" class="container hidden">
+    <h2 id="pageTitle">Happy Valentine's Day!</h2>
+    <p id="pageText">This little book is made just for you...</p>
+    <button onclick="prevPage()" id="prevBtn" disabled>← Previous</button>
+    <button onclick="nextPage()">Next →</button>
+</div>
+
+<script>
+    const pages = [
+        { title: "Happy Valentine's Day!", text: "This little book is made just for you..." },
+        { title: "Loving you was my best decision", text: "You are my favorite person in the whole world! 🐼" },
+        { title: "Sorry for when I'm annoying", text: "Your smile is everything that keeps me going. 🧸" },
+        { title: "Forever & Always", text: "Happy Anniversary on 04/06/10. I love you! ❤️" },
+        { title: "Bonus Page: Our Future", text: "Together forever, through thick and thin. Can't wait for more adventures! 🌟" }
+    ];
+    let currentPage = 0;
+
+    function checkDate() {
+        const input = document.getElementById('dateInput').value;
+        if (input === "04/06/10") {
+            document.getElementById('login').classList.add('hidden');
+            document.getElementById('book').classList.remove('hidden');
+            document.getElementById('book').classList.add('visible');
+        } else {
+            alert("Oops! That's not the right date.");
+        }
+    }
+
+    function nextPage() {
+        if (currentPage < pages.length - 1) {
+            currentPage++;
+            updatePage();
+        } else {
+            alert("The End! I love you.");
+        }
+    }
+
+    function prevPage() {
+        if (currentPage > 0) {
+            currentPage--;
+            updatePage();
+        }
+    }
+
+    function updatePage() {
+        document.getElementById('pageTitle').innerText = pages[currentPage].title;
+        document.getElementById('pageText').innerText = pages[currentPage].text;
+        document.getElementById('prevBtn').disabled = (currentPage === 0);
+    }
+</script>
+
+</body>
+</html>
